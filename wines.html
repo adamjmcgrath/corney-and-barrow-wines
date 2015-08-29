@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      h2 { font-size: 16px !important; }
+      h2, div { font-family: arial; font-size: 13px; line-height: 1.4; }
+      strong span { font-weight: normal; color: red; }
+    </style>
+  </head>
+  <body>
+    {% regroup wines by date as dates %}
+    {% for date in dates %}
+      {% if not is_email %}<h2>{{ date.grouper }}</h2>{% endif %}
+      {% for wine in date.list %}
+        <div class="wine">
+          <p>
+          <strong>{{ wine.vintage }} {{ wine.country_region }} {% if wine.label_condition %}<span>({{ wine.label_condition }})</span>{% endif %}</strong><br>
+            {{ wine.description }} ({% if wine.bottles %}{{ wine.bottles }} {{ wine.unit_size|title }}{{ wine.bottles|pluralize }}{% endif %}{% if wine.cases %}{{ wine.cases }} Case{{ wine.cases|pluralize }} of {{ wine.unit_per_case }} {{ wine.unit_size|title }}{{ wine.unit_per_case|pluralize }}{% endif %})<br>
+            <a href="{{ wine.link }}">{{ wine.link }}</a><br>
+            {% if wine.price_duty_paid_inc_vat %}
+            £{{ wine.price_duty_paid_inc_vat }} per {{ wine.price_per|title }} (inc VAT) {{ wine.status }}
+            {% endif %}
+            {% ifequal wine.price_per.strip "CASE" %}
+            - {% if wine.price_per_bottle %}(£{{ wine.price_per_bottle|floatformat:2 }} per Bottle){% endif %}
+            {% endifequal %}
+            {% if wine.ullage %}<br>Ullage: {{ wine.ullage }}{% endif %}
+            {% if wine.packaging %}<br>Packaging: {{ wine.packaging }}{% endif %}            
+          </p>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </body>
+</html>
+

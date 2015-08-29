@@ -1,0 +1,7 @@
+cron:
+- description: send email
+  url: /sendemail
+  schedule: every day 10:00 
+- description: get wines
+  url: /getwines
+  schedule: every day 09:00
