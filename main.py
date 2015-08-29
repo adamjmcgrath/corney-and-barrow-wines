@@ -14,14 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from google.appengine.ext import deferred 
+import os
+from google.appengine.ext import deferred
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 
 import tasks
 import views
-
-webapp.template.register_template_library('django.contrib.humanize.templatetags.humanize')
 
 
 def main():
