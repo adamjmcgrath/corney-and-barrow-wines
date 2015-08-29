@@ -58,7 +58,7 @@ class SendEmail(webapp.RequestHandler):
       }
       path = os.path.join(os.path.dirname(__file__), 'wines.html')
       mail.send_mail(sender="adamjmcgrath@gmail.com",
-                     to="adamjmcgrath@gmail.com, Thomas.Holmes@miller-insurance.com, SHolmes@imgworld.com",
+                     to="adamjmcgrath@gmail.com, Thomas.Holmes@miller-insurance.com, sthholmes@gmail.com",
                      subject="New wines on Corney & Barrow",
                      body="View in HTML",
                      html=template.render(path, template_values))
